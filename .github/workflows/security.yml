@@ -78,7 +78,7 @@ jobs:
       # ¿Qué implicación tiene eso en un pipeline de CI/CD real?
       - name: Ejecutar análisis SAST
         run: |
-          # TODO: escribe aquí el comando de Semgrep con los 4 rulesets
+          semgrep --config p/python --config p/owasp-top-ten --config p/secrets --config p/sql-injection Unidad_3_Seguridad_en_Aplicaciones_y_Datos/devsecops-lab/app/ --error
 
 
   # ═══════════════════════════════════════════════════════════════════════════
@@ -116,8 +116,8 @@ jobs:
       #           ¿Cuáles de los paquetes tienen versiones seguras disponibles?
       - name: Instalar y ejecutar pip-audit
         run: |
-          # TODO: instala pip-audit
-          # TODO: ejecuta la auditoría sobre el requirements.txt del lab
+        pip install pip-audit
+        pip-audit -r Unidad_3_Seguridad_en_Aplicaciones_y_Datos/devsecops-lab/app/requirements.txt
 
 
   # ═══════════════════════════════════════════════════════════════════════════
@@ -159,9 +159,9 @@ jobs:
       # Pregunta: ¿qué pasa si un test falla? ¿Se bloquea el merge del PR?
       - name: Instalar dependencias
         run: |
-          # TODO: instala las dependencias del proyecto
-          # TODO: instala pytest
+          pip install -r Unidad_3_Seguridad_en_Aplicaciones_y_Datos/devsecops-lab/app/requirements.txt
+        pip install pytest
 
       - name: Ejecutar tests
         run: |
-          # TODO: ejecuta pytest sobre la carpeta tests/ del lab
+          pytest Unidad_3_Seguridad_en_Aplicaciones_y_Datos/devsecops-lab/tests/ -v
